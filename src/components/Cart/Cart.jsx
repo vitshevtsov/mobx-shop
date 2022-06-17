@@ -18,6 +18,7 @@ const Cart = observer(() => {
                 renderItem={renderCartItem}
             />
             {!cart.cart.length && 'Ваша корзина пуста'}
+            {cart.cart.length !== 0 && `Итого: ${cart.totalPrice} $`}
         </>
         
     );

@@ -1,11 +1,10 @@
-import { observer } from 'mobx-react-lite';
 import React from 'react';
-import cart from '../../store/cart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as faHeartEmpty } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartFilled } from '@fortawesome/free-solid-svg-icons';
+import { observer } from 'mobx-react-lite';
 import products from '../../store/products';
-
+import cart from '../../store/cart';
 
 const CatalogItem = observer(({product}) => {
 
@@ -47,7 +46,7 @@ const CatalogItem = observer(({product}) => {
             </div>
             <b>{product.dish}</b>
             <div className="catalog-item_description">{product.description}</div>
-            <p>price: { product.price } $</p>
+            <p>price: {product.price} $</p>
             {addInCartButton}
         </div>
     );

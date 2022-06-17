@@ -1,7 +1,7 @@
 import React from 'react';
-import { observer } from 'mobx-react-lite';
 import CatalogItem from '../CatalogItem/CatalogItem';
 import List from '../List/List';
+import { observer } from 'mobx-react-lite';
 import products from '../../store/products';
 
 const Favourites = observer(() => {
@@ -18,6 +18,7 @@ const Favourites = observer(() => {
             items={favProducts}
             renderItem={renderProduct}
         />
+        {!favProducts.length && 'Вы пока не добавили товары в Избранное'}
     </div>;
 });
 
