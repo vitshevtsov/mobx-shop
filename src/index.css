@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* запрет смещения стр при появлении полосы прокрутки */
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
 }
 
 body * {
@@ -14,27 +18,49 @@ body * {
 :root {
   --padding: 8px;
   --margin: 8px;
-  --primary: #235ad1;
+  --primary: rgb(85, 26, 139);
   --secondary:#23d1a8;
   --radius: 5px;
 }
 
 .App {
+  min-height: 100vh;
   max-width: 1000px;
   margin: 0 auto;
-  padding-bottom: calc(var(--padding) * 2);
-  border: 1px solid #b9c3ce;
+  padding: 0 calc(var(--padding) * 2) calc(var(--padding) * 2) calc(var(--padding) * 2);
   border-top: none;
 }
+
+.button {
+  padding: var(--padding) calc(var(--padding)*2);
+  border-radius: var(--radius);
+  border: none;
+  color: #fafafa;
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+.catalog-item_button:hover {
+  background-image: linear-gradient(150deg, var(--primary), var(--secondary));
+}
+
+.catalog-item_button:disabled {
+  background-color: var(--secondary);
+}
+
+
+.catalog-item_button:disabled:hover {
+  background-image: none;
+}
+
+
 .navbar {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  padding: var(--padding);
   background-color: #fafafa;
   align-items: center;
-  padding: 0 20px;
 }
 
 .navbar-nav {
@@ -48,13 +74,9 @@ body * {
 .navbar a {
   text-decoration: none;
   font-weight: bold;
-  border-bottom: 4px solid #b9c3ce;
+  border-bottom: none;
   padding: calc(var(--padding) * 2) 0;
   margin: calc(var(--margin) * 2);
-}
-
-.navbar a:first-child {
-  border-bottom: none;
 }
 
 .catalog {
@@ -70,29 +92,33 @@ body * {
   padding: calc(var(--padding) * 2);
   margin: calc(var(--margin) * 2);
 }
+
 .catalog-item_img-wrapper {
   position: relative;
   max-width: 200px;
   max-height: auto;
 }
+
 .catalog-item_img {
   max-width: 200px;
   max-height: auto;
   margin-bottom: var(--margin);
 }
+
 .catalog-item_img-icon {
   position: absolute;
-  right: var(--padding);
-  top: var(--padding);
+  right: calc(var(--padding) / 10);
+  top: calc(var(--padding) / 10);
 }
+
 .catalog-item_description {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 3.4rem;
 }
+
 .icon {
   cursor: pointer;
 }
@@ -131,19 +157,70 @@ body * {
   text-align: center;
   font-weight: normal;
 }
-.fade-enter-active,
-.fade-leave-active {
-  transition-property: opacity;
-  transition-duration: 0.25s;
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.fade-enter-active {
-  transition-delay: 0.25s;
+.cart--empty {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
+.cart-total-checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: calc(var(--margin) * 2);
 }
-.router-link-exact-active.router-link-exact-active {
-  color: var(--primary);
-  border-bottom: 4px solid var(--secondary);
+.cart-checkout-button.cart-checkout-button {
+  padding: calc(var(--padding) * 1.5) calc(var(--padding) * 3);
+  background-color: var(--secondary);
+  font-size: 1.2rem;
+}
+.cart-checkout-button.cart-checkout-button:hover,
+.cart-checkout-button.cart-checkout-button:focus {
+  background-image: none;
+  opacity: 0.85;
+}
+
+.cart-item {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  column-gap: 5px;
+  align-items: center;
+  box-shadow: 0 0 4px 0 #c0c0c0;
+  padding: calc(var(--padding) * 2);
+  margin: calc(var(--margin) * 2);
+  font-size: 0.85rem;
+}
+.cart-item_img {
+  max-width: 100px;
+  max-height: auto;
+}
+.cart-item_text {
+  flex-basis: 50%;
+}
+.cart-item_description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 3.4rem;
+}
+.cart-item_quantity-and-icon-wrapper {
+  display: flex;
+  column-gap: 20px;
+}
+.cart-item_button.cart-item_button {
+  background-color: #f91155;
+}
+.cart-item_button.cart-item_button:hover,
+.cart-item_button.cart-item_button:focus {
+  background-image: none;
+  opacity: 0.85;
 }

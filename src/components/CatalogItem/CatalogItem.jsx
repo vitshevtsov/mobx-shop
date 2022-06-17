@@ -1,34 +1,54 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import cart from '../../store/cart';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as faHeartEmpty } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faHeartFilled } from '@fortawesome/free-solid-svg-icons';
+import products from '../../store/products';
+
 
 const CatalogItem = observer(({product}) => {
+
+    const favIcon = product.isFav
+        ? <FontAwesomeIcon
+            className="icon catalog-item_img-icon"
+            size="lg"
+            color='#f91155'
+            icon={faHeartFilled}
+            onClick={() => products.toggleFav(product)}
+        />
+        : <FontAwesomeIcon
+            className="icon catalog-item_img-icon"
+            size="lg"
+            color='#f91155'
+            icon={faHeartEmpty}
+            onClick={() => products.toggleFav(product)}
+        />;
+
+    const addInCartButton = (cart.isInCart(product.id))
+        ? <button
+            className="catalog-item_button button"
+            disabled
+            onClick={() => cart.addToCart(product)}
+        >
+    Товар уже в корзине
+        </button>
+        : <button
+            className="catalog-item_button button"
+            onClick={() => cart.addToCart(product)}
+        >
+    Добавить в корзину
+        </button>;
+
     return (
         <div className="catalog-item">
             <div className="catalog-item_img-wrapper">
-                {/* <img
-        :src="product.pathToImg"
-        alt="product image"
-        class="catalog-item_img"
-      />
-      <icon-favourite
-        class="catalog-item_img-icon"
-        :isFav="product.isFavourite"
-        @onClickFav="onClickFav"
-      /> */}
+                {favIcon} 
             </div>
-
             <b>{product.dish}</b>
             <div className="catalog-item_description">{product.description}</div>
             <p>price: { product.price } $</p>
-
-            <button
-                className="catalog-item_button button"
-                onClick={() => cart.addToCart(product)}
-            >
-              Добавить в корзину
-            </button>
-            <div>{cart.cart.length}</div>
+            {addInCartButton}
         </div>
     );
 });

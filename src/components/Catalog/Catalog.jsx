@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import { observer } from 'mobx-react-lite';
 import CatalogItem from '../CatalogItem/CatalogItem';
+import List from '../List/List';
 import products from '../../store/products';
 
 const Catalog = observer(() => {
@@ -31,17 +32,17 @@ const Catalog = observer(() => {
     //     fetchData();
 
     // }, []);
-
-    const productsList = products.products.map(product => <CatalogItem
+    const renderProduct = (product) => <CatalogItem
         key={product.id}
         product={product}
-    />);
-    console.log('render');
+    />;
 
-    return <>
-        <h2>Catalog</h2>
-        {productsList}
-    </>;
+    return <div className="catalog">
+        <List
+            items={products.products}
+            renderItem={renderProduct}
+        />
+    </div>;
 });
 
 export default Catalog;
