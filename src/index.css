@@ -152,3 +152,34 @@ body * {
   background-image: none;
   opacity: 0.85;
 }
+
+/* Transitions */
+.cartItems-enter {
+  opacity: 0;
+}
+.cartItems-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.cartItems-exit {
+  opacity: 1;
+}
+.cartItems-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+
+.favItems-enter {
+  opacity: 0;
+}
+.favItems-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+.favItems-exit {
+  opacity: 1;
+}
+.favItems-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+}
